@@ -23,4 +23,4 @@ else:
 if preco_A < preco_B:
     print(True)
 else: 
-		print(False)
+    print(False)
