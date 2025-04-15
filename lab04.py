@@ -20,16 +20,21 @@ crit_e = 0
 while hp_jinx > 0 and hp_ekko > 0:
     golpe = input()
 
+    # Condicional para ataque;
     if golpe == "J":
+        # Caso o golpe seja crítico;
         if crit_j == crit_jinx:
             hp_ekko -= atk_jinx * 2
             crit_j = 0
+        # Golpe não crítico;
         else:
             hp_ekko -= atk_jinx
             crit_j += 1
 
+        # Condicional para regen. de vida;
         if hp_jinx != max_hp_jinx:
             hp_jinx += max_hp_jinx * (regen_jinx / 100)
+            # Voltar a vida para a máxima permitida;
             if hp_jinx > max_hp_jinx:
                 hp_jinx = max_hp_jinx
 
