@@ -1,24 +1,34 @@
-seq_acordes = input().split()  # ou sua lista já pronta
+entrada_usuario = input()   
+lista_acordes = []
 
-i = 0
-while i < len(seq_acordes) - 1:
-    atual = seq_acordes[i]
-    proximo = seq_acordes[i + 1]
+for caractere in entrada_usuario:
+    if caractere == "M" or caractere == "m":
+        indice = entrada_usuario.index(caractere)
+        lista_acordes.append(entrada_usuario[:indice + 1])
+        entrada_usuario = entrada_usuario[indice + 1:]
 
-    letra = atual[0]
-    remover = {
-        "A": ("G", "A", "G"),
-        "B": ("C", "B", "A"),
-        "C": ("D", "C", "B"),
-        "D": ("E", "D", "C"),
-        "E": ("F", "E", "D"),
-        "F": ("G", "F", "E"),
-        "G": ("A", "G", "F")
-    }
+# Dicionário de regras para remoção de acordes;
+regras_remocao = {
+    "A": ("G", "A", "G"),
+    "B": ("C", "B", "A"),
+    "C": ("D", "C", "B"),
+    "D": ("E", "D", "C"),
+    "E": ("F", "E", "D"),
+    "F": ("G", "F", "E"),
+    "G": ("A", "G", "F")
+}
 
-    if letra in remover and proximo.startswith(remover[letra]):
-        del seq_acordes[i + 1]
+indice_atual = 0
+while indice_atual < len(lista_acordes) - 1:
+    acorde_atual = lista_acordes[indice_atual]
+    proximo_acorde = lista_acordes[indice_atual + 1]
+
+    nota_base = acorde_atual[0]
+    if proximo_acorde.startswith(regras_remocao[nota_base]):
+        lista_acordes.pop(indice_atual + 1)
     else:
-        i += 1
+        indice_atual += 1
 
-print(seq_acordes)
+# Saída formatada dos acordes resultantes;
+print(' '.join(map(str, lista_acordes)))
+
